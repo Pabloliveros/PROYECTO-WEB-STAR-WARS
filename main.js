@@ -5,28 +5,25 @@ let velocidadAsc = true;
 
 // CONSTANTES//
 const naves= [
-  { nombre: "X-Wing", tipo: "caza", velocidad: 100, tripulacion: 1, estado: "operativa", emoji: "🚀" },
-  { nombre: "Millennium Falcon", tipo: "transporte", velocidad: 150, tripulacion: 6, estado: "operativa", emoji: "🛸" },
-  { nombre: "Y-Wing", tipo: "caza", velocidad: 80, tripulacion: 2, estado: "en reparación", emoji: "✈️" },
-  { nombre: "A-Wing", tipo: "caza", velocidad: 175, tripulacion: 1, estado: "operativa", emoji: "⚡" },
-  { nombre: "B-Wing", tipo: "fragata", velocidad: 91, tripulacion: 3, estado: "destruida", emoji: "💥" }
+  { nombre: "x-wing", tipo: "caza", velocidad: 100, tripulacion: 1, estado: "operativa", emoji: "🚀" },
+  { nombre: "millennium falcon", tipo: "transporte", velocidad: 150, tripulacion: 6, estado: "operativa", emoji: "🛸" },
+  { nombre: "y-wing", tipo: "caza", velocidad: 80, tripulacion: 2, estado: "en reparación", emoji: "✈️" },
+  { nombre: "a-wing", tipo: "caza", velocidad: 175, tripulacion: 1, estado: "operativa", emoji: "⚡" },
+  { nombre: "b-wing", tipo: "fragata", velocidad: 91, tripulacion: 3, estado: "destruida", emoji: "💥" }
 ];
 let pilotos= JSON.parse(localStorage.getItem('pilotos')) || [
 
-  { id: 1, nombre: "Luke Skywalker", rango: "Comandante", nave: "X-Wing",            victorias: 12, estado: "activo" },
-
-  { id: 2, nombre: "Han Solo",       rango: "Capitán",    nave: "Millennium Falcon", victorias: 8,  estado: "activo" },
-
-  { id: 3, nombre: "Wedge Antilles", rango: "Teniente",   nave: "X-Wing",            victorias: 15, estado: "herido" },
-
-  { id: 4, nombre: "Leia Organa",    rango: "General",    nave: "A-Wing",            victorias: 5,  estado: "activo" },
+  {id: 1, nombre: "luke skywalker", rango: "Comandante", nave: "X-Wing", victorias: 12, estado: "activo" },
+  {id: 2, nombre: "han solo", rango: "Capitán", nave: "Millennium Falcon", victorias: 8,  estado: "activo" },
+  {id: 3, nombre: "wedge antilles", rango: "Teniente", nave: "X-Wing", victorias: 15, estado: "herido" },
+  {id: 4, nombre: "leia organa", rango: "General", nave: "A-Wing", victorias: 5,  estado: "activo" },
 
 ];
 const secciones= [
-  { texto: "Hangar de Naves", id: "seccion-hangar" },
-  { texto: "Registro de Pilotos", id: "seccion-pilotos" },
-  { texto: "Panel de Misiones", id: "seccion-misiones" },
-  { texto: "Mando de la Alianza", id: "seccion-mando" }
+  { texto: "hangar de naves", id: "seccion-hangar" },
+  { texto: "registro de pilotos", id: "seccion-pilotos" },
+  { texto: "panel de misiones", id: "seccion-misiones" },
+  { texto: "mando de la alianza", id: "seccion-mando" }
 ];
 
 

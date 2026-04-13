@@ -168,7 +168,9 @@ label {
   border-bottom-color: var(--color-primario);
 }
 
-
+#lista-p {
+  letter-spacing: 1px;
+}
 
 
 
@@ -176,17 +178,14 @@ label {
 
 
 :root {
+  --bg: var(--color-fondo);
+  --text: #ffffff;
+}
+ 
+:root.dark {
   --bg: #ffffff;
   --text: #000000;
 
-
-  
-}
-
- 
-:root.dark {
-  --bg: var(--color-fondo);
-  --text: #ffffff;
 }
 
 body {
