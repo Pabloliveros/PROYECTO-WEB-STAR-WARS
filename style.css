@@ -1,0 +1,234 @@
+:root {
+  --color-fondo: #0a0a0f;
+  --color-fondo-nav: #0d0d14;
+  --color-fondo-tarjeta: #12121a;
+  --color-primario: #ffe81f;
+  --color-secundario: #4fc3f7;
+  --color-texto: #e0e0e0;
+  --color-texto-suave: #888;
+  --color-borde: #2a2a3a;
+  --fuente-principal: 'Starjedi', sans-serif;
+  --radio-borde: 6px;
+}
+
+@font-face {
+  font-family: 'StarJedi';
+  src: url('Starjedi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-principal);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 3.5px;
+}
+
+p {
+  letter-spacing: 1px;
+  ;
+}
+
+
+.color-Hangar{
+color: var(--color-secundario);
+}
+#cabecera {
+  background-color: var(--color-fondo-nav);
+  border-bottom: 2px solid var(--color-primario);
+  padding: 30px;
+  text-align: center;
+}
+
+.cabecera-titulo {
+  color: var(--color-primario);
+}
+
+.cabecera-subtitulo {
+  color: var(--color-texto-suave);
+  margin-top: 10px;
+}
+
+#navegacion-principal {
+  background-color: var(--color-fondo-nav);
+  border-bottom: 1px solid var(--color-borde);
+  display: flex;
+  justify-content: center;
+}
+
+#contenido-principal {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.seccion--oculta {
+  display: none;
+}
+
+.seccion-titulo {
+  color: var(--color-primario);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.hangar-controles, .misiones-filtro {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+label {
+  color: var(--color-texto-suave);
+}
+
+.kanban-tablero {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.kanban-columna {
+  background-color: var(--color-fondo-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 20px;
+  min-height: 300px;
+}
+
+.kanban-titulo {
+  color: var(--color-secundario);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-contenido {
+  display: grid;
+  gap: 1rem;
+}
+
+.dashboard-tarjeta {
+  background-color: var(--color-fondo-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 20px;
+}
+
+.dashboard-subtitulo {
+  color: var(--color-secundario);
+  margin-bottom: 10px;
+}
+
+#pie-pagina {
+  background-color: var(--color-fondo-nav);
+  border-top: 1px solid var(--color-borde);
+  color: var(--color-texto-suave);
+  padding: 20px;
+  text-align: center;
+}
+
+.pie-texto{
+  letter-spacing: 0.5px;
+}
+
+.nav-boton {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--color-texto-suave);
+  cursor: pointer;
+  font-family: var(--fuente-principal);
+  letter-spacing: 1px;
+  padding: 15px 20px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-boton:hover {
+  color: var(--color-texto);
+}
+
+.nav-boton--activo {
+  color: var(--color-primario);
+  border-bottom-color: var(--color-primario);
+}
+
+
+
+
+
+
+
+
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+
+
+  
+}
+
+ 
+:root.dark {
+  --bg: var(--color-fondo);
+  --text: #ffffff;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  place-content: center;
+}
+
+/*Transicion*/
+
+::view-transition-group(root) {
+  animation-duration: 1.5s;
+  animation-timing-function: var(--expo-out);
+}
+::view-transition-new(root) {
+  animation-name: reveal-light;
+  animation-fill-mode: both;
+}
+::view-transition-old(root),
+.dark::view-transition-old(root) {
+  animation: none;
+  animation-fill-mode: both;
+  z-index: -1;
+}
+.dark::view-transition-new(root) {
+  animation-name: reveal-dark;
+  animation-fill-mode: both;
+}
+@keyframes reveal-dark {
+  from {
+    clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%);
+  }
+  to {
+    clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%);
+  }
+}
+@keyframes reveal-light {
+  from {
+    clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%);
+  }
+  to {
+    clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
+  }
+}
+   

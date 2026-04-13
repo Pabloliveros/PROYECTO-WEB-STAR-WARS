@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base de la Alianza Rebelde</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    
+  <header id="cabecera">
+    <div class="cabecera-contenido">
+      <h1 class="cabecera-titulo">
+        Base de la Alianza Rebelde
+      </h1>
+      <p class="cabecera-subtitulo">Panel de Control Galáctico</p>
+    </div>
+  </header>
+
+  <nav id="navegacion-principal">
+  </nav>
+
+  <main id="contenido-principal">
+
+    <section id="seccion-hangar" class="seccion seccion--activa">
+      
+      <h2 class="seccion-titulo">Hangar de Naves</h2>
+
+      <div class="hangar-controles">
+      </div>
+
+      <p id="contador-naves" class="contador-naves">
+      </p>
+    </section>
+
+    <section id="seccion-pilotos" class="seccion seccion--oculta">
+  <h2 class="seccion-titulo">Registro de Pilotos</h2>
+
+  <div class="formulario-contenedor">
+    <h3 id="titulo-formulario-piloto">Añadir piloto</h3>
+    <div id="contenedor-form-piloto"></div> 
+  </div>
+
+  <div class="lista-pilotos-contenedor">
+    <h3>Pilotos Registrados</h3>
+    <ul id="lista-pilotos-dinamica"></ul> </div>
+</section>
+
+    <section id="seccion-misiones" class="seccion seccion--oculta">
+      <h2 class="seccion-titulo">Panel de Misiones</h2>
+
+      <div class="formulario-contenedor">
+        <h3>Nueva misión</h3>
+      </div>
+
+      <div class="misiones-filtro">
+        <label>Filtrar por dificultad:</label>
+      </div>
+
+      <div class="kanban-tablero">
+
+        <div id="columna-pendiente" class="kanban-columna">
+          <h3 class="kanban-titulo">Pendiente</h3>
+        </div>
+
+        <div id="columna-en-curso" class="kanban-columna">
+          <h3 class="kanban-titulo">En curso</h3>
+        </div>
+
+        <div id="columna-completada" class="kanban-columna">
+          <h3 class="kanban-titulo">Completada</h3>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="seccion-mando" class="seccion seccion--oculta">
+      <h2 class="seccion-titulo">Mando de la Alianza</h2>
+
+      <div id="dashboard-contenido" class="dashboard-contenido">
+        <div id="stats-naves" class="dashboard-tarjeta">
+          <h3 class="dashboard-subtitulo">Naves</h3>
+        </div>
+
+        <div id="stats-pilotos" class="dashboard-tarjeta">
+          <h3 class="dashboard-subtitulo">Pilotos</h3>
+        </div>
+
+        <div id="stats-misiones" class="dashboard-tarjeta">
+          <h3 class="dashboard-subtitulo">Misiones</h3>
+        </div>
+
+        <div id="stats-records" class="dashboard-tarjeta">
+          <h3 class="dashboard-subtitulo">Récords</h3>
+        </div>
+
+        <div id="visualizacion" class="dashboard-tarjeta">
+          <h3 class="dashboard-subtitulo">Progreso de misiones</h3>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="pie-pagina">
+     <button id="theme-toggle" >Cambiar Tema</button>
+    <p class="pie-texto">Alianza Rebelde. que la Fuerza del dom te acompañe.</p>
+  </footer>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
