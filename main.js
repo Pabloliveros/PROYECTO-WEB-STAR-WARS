@@ -211,27 +211,14 @@ function inicializarNav() {
   navElement.firstChild.classList.add("nav-boton--activo");
 }
 
-//INICIO DE LAS FUNCIONES//
-window.onload= () => {
-  inicializarNav();
-  mostrarTodoElHangar();
-  renderPilotos();
-  mostrarSeccion('seccion-hangar');
-};
-
-
-
-
-
 const btn = document.getElementById('theme-toggle');
 
 btn.addEventListener('click', (e) => {
-    // Función que cambia la clase
+    //Función que cambia la clase a oscuro
     const toggleTheme = () => {
         document.documentElement.classList.toggle('dark');
     };
 
-    // Si el navegador no soporta la API, cambio directo
     if (!document.startViewTransition) {
         toggleTheme();
         return;
@@ -245,3 +232,159 @@ btn.addEventListener('click', (e) => {
     // Iniciamos la transición
     document.startViewTransition(toggleTheme);
 });
+
+let misiones = JSON.parse(localStorage.getItem('misiones')) || [];
+
+function renderMisiones() {
+  const seccion = document.getElementById('seccion-misiones');
+
+  seccion.innerHTML = `
+    <h2 class="seccion-titulo">Panel de Misiones</h2>
+
+    <div class="formulario-contenedor">
+      <h3>Nueva misión</h3>
+      <form id="form-mision" onsubmit="crearMision(event)">
+
+        <input id="m-nombre" placeholder="Nombre de la misión" required>
+
+        <select id="m-piloto" required>
+          <option value="" disabled selected>Asignar piloto</option>
+          ${pilotos.filter(p => p.estado === 'activo').map(p => `<option value="${p.nombre}">${p.nombre}</option>`).join('')}
+        </select>
+
+        <select id="m-dificultad" required>
+          <option value="" disabled selected>Dificultad</option>
+          <option value="facil">Fácil</option>
+          <option value="media">Media</option>
+          <option value="dificil">Difícil</option>
+          <option value="suicida">Suicida</option>
+        </select>
+
+        <input type="date" id="m-fecha" required>
+        <textarea id="m-descripcion" placeholder="Descripción breve" required></textarea>
+
+        <button type="submit">Añadir misión</button>
+      </form>
+    </div>
+
+    <div class="misiones-filtro">
+      <label>Filtrar por dificultad:</label>
+      <select id="filtro-dificultad" onchange="renderMisiones()">
+        <option value="todas">Todas</option>
+        <option value="facil">Fácil</option>
+        <option value="media">Media</option>
+        <option value="dificil">Difícil</option>
+        <option value="suicida">Suicida</option>
+      </select>
+    </div>
+
+    <div class="kanban-tablero">
+      <div id="columna-pendiente" class="kanban-columna">
+        <h3 class="kanban-titulo">Pendiente: <span id="contador-pendiente" class="kanban-contador">0</span></h3>
+      </div>
+      <div id="columna-en-curso" class="kanban-columna">
+        <h3 class="kanban-titulo">En curso: <span id="contador-en-curso" class="kanban-contador">0</span></h3>
+      </div>
+      <div id="columna-completada" class="kanban-columna">
+        <h3 class="kanban-titulo">Completada: <span id="contador-completada" class="kanban-contador">0</span></h3>
+      </div>
+    </div>
+  `;
+
+  pintarTarjetas();
+}
+
+function pintarTarjetas() {
+  // Leemos el filtro seleccionado
+  const filtro = document.getElementById('filtro-dificultad').value;
+
+  // Filtramos las misiones según la dificultad
+  const misionesFiltradas = misiones.filter(m => {
+    return filtro === 'todas' || m.dificultad === filtro;
+  });
+
+  // Vaciamos las tres columnas (solo las tarjetas, no el título)
+  document.getElementById('columna-pendiente').querySelectorAll('.mision-tarjeta').forEach(t => t.remove());
+  document.getElementById('columna-en-curso').querySelectorAll('.mision-tarjeta').forEach(t => t.remove());
+  document.getElementById('columna-completada').querySelectorAll('.mision-tarjeta').forEach(t => t.remove());
+
+  // Contadores
+  let contPendiente = 0;
+  let contEnCurso = 0;
+  let contCompletada = 0;
+
+  // Recorremos las misiones filtradas y creamos una tarjeta por cada una
+  for (let i = 0; i < misionesFiltradas.length; i++) {
+    const m = misionesFiltradas[i];
+
+    const tarjeta = document.createElement('div');
+    tarjeta.classList.add('mision-tarjeta');
+    tarjeta.innerHTML = `
+      <p><strong>${m.nombre}</strong></p>
+      <p>${m.descripcion}</p>
+      <p>Piloto: ${m.piloto}</p>
+      <p>Dificultad: ${m.dificultad}</p>
+      <p>Fecha: ${m.fecha}</p>
+      <div class="tarjeta-botones">
+        ${m.columna !== 'completada' ? `<button onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
+        <button onclick="eliminarMision(${m.id})">Eliminar</button>
+      </div>
+    `;
+
+    // La metemos en la columna que le corresponde
+    document.getElementById('columna-' + m.columna).appendChild(tarjeta);
+
+    // Actualizamos el contador correspondiente
+    if (m.columna === 'pendiente') contPendiente++;
+    else if (m.columna === 'en-curso') contEnCurso++;
+    else if (m.columna === 'completada') contCompletada++;
+  }
+
+  // Mostramos los contadores
+  document.getElementById('contador-pendiente').textContent = contPendiente;
+  document.getElementById('contador-en-curso').textContent = contEnCurso;
+  document.getElementById('contador-completada').textContent = contCompletada;
+}
+
+function avanzarMision(id) {
+  const mision = misiones.find(m => m.id === id);
+  if (mision.columna === 'pendiente') mision.columna = 'en-curso';
+  else if (mision.columna === 'en-curso') mision.columna = 'completada';
+  localStorage.setItem('misiones', JSON.stringify(misiones));
+  renderMisiones();
+}
+
+function eliminarMision(id) {
+  if (confirm('¿Quieres eliminar esta misión?')) {
+    misiones = misiones.filter(m => m.id !== id);
+    localStorage.setItem('misiones', JSON.stringify(misiones));
+    renderMisiones();
+  }
+}
+
+function crearMision(e) {
+  e.preventDefault(); // esto es lo que evita que la página se recargue
+
+  const mision = {
+    id: Date.now(),
+    nombre: document.getElementById('m-nombre').value,
+    piloto: document.getElementById('m-piloto').value,
+    dificultad: document.getElementById('m-dificultad').value,
+    fecha: document.getElementById('m-fecha').value,
+    descripcion: document.getElementById('m-descripcion').value,
+    columna: 'pendiente' // toda misión nueva empieza aquí
+  };
+
+  misiones.push(mision);
+  localStorage.setItem('misiones', JSON.stringify(misiones));
+  renderMisiones();
+}
+
+//INICIO DE LAS FUNCIONES//
+window.onload= () => {
+  inicializarNav();
+  mostrarTodoElHangar();
+  renderPilotos();
+  renderMisiones();
+  mostrarSeccion('seccion-hangar');
+};

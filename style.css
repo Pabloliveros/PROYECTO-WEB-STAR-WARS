@@ -5,10 +5,54 @@
   --color-primario: #ffe81f;
   --color-secundario: #4fc3f7;
   --color-texto: #e0e0e0;
-  --color-texto-suave: #888;
+  --color-texto-suave: #989898;
   --color-borde: #2a2a3a;
   --fuente-principal: 'Starjedi', sans-serif;
   --radio-borde: 6px;
+  --bg: var(--color-fondo);
+  --text: #ffffff;
+}
+ 
+:root.dark {
+  --bg: #e0e0e0;
+  --text: #000000;
+  --color-primario: #E52330;
+  --color-secundario: #f08400;
+  --color-texto-suave: #454545;
+}
+
+:root.dark #cabecera {
+  background-color: #e0e0e0;
+  border-bottom-color: #333;
+}
+
+:root.dark #navegacion-principal {
+  background-color: #e0e0e0;
+  border-bottom-color: #ccc;
+}
+
+:root.dark #pie-pagina {
+  background-color: #e0e0e0;
+  border-top-color: #ccc;
+}
+
+:root.dark .nav-boton {
+  color: #333;
+}
+
+:root.dark .nav-boton:hover {
+  color: #000000;
+}
+
+:root.dark .nav-boton--activo {
+  color: #E52330;
+  border-bottom-color: #E52330;
+}
+
+:root.dark .kanban-columna,
+:root.dark .dashboard-tarjeta {
+  background-color: #d0d0d0;
+  border-color: #bbb;
 }
 
 @font-face {
@@ -16,6 +60,10 @@
   src: url('Starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+.logo {
+  width: 100px;
 }
 
 *, *::before, *::after {
@@ -32,6 +80,9 @@ body {
   display: flex;
   flex-direction: column;
   letter-spacing: 3.5px;
+  background-color: var(--bg);
+  color: var(--text);
+  place-content: center;
 }
 
 p {
@@ -39,15 +90,22 @@ p {
   ;
 }
 
-
 .color-Hangar{
 color: var(--color-secundario);
 }
+
 #cabecera {
   background-color: var(--color-fondo-nav);
   border-bottom: 2px solid var(--color-primario);
   padding: 30px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cabecera-contenido {
+  display: flex;
+  flex-direction: column;
 }
 
 .cabecera-titulo {
@@ -170,29 +228,15 @@ label {
 
 #lista-p {
   letter-spacing: 1px;
+  line-height: 45px;
 }
 
 
-
-
-
-
-:root {
-  --bg: var(--color-fondo);
-  --text: #ffffff;
-}
- 
-:root.dark {
-  --bg: #ffffff;
-  --text: #000000;
-
-}
-
-body {
+/* body {
   background-color: var(--bg);
   color: var(--text);
   place-content: center;
-}
+} */
 
 /*Transicion*/
 
