@@ -72,16 +72,10 @@ function mostrarTodoElHangar(navesAMostrar=naves) {
   document.getElementById('contador-naves').textContent = `Mostrando ${navesAMostrar.length} naves.`;
 }
 
-
-
-
-
-
-
 //FILTRAR NAVES//
 function filtrarNaves() {
-  filtroTexto=document.getElementById('busqueda-nave').value.toLowerCase();
-  filtroTipo=document.getElementById('filtro-tipo').value;
+  filtroTexto = document.getElementById('busqueda-nave').value.toLowerCase();
+  filtroTipo = document.getElementById('filtro-tipo').value;
   aplicarCambios();
 }
 
@@ -94,9 +88,9 @@ function toggleOrden() {
 
 function aplicarCambios() {
   //Primero filtramos según lo que haya en el input y el select
-  let resultado=naves.filter(n => {
-    const coincideTexto=n.nombre.toLowerCase().includes(filtroTexto);
-    const coincideTipo=filtroTipo==='todos' || n.tipo===filtroTipo;
+  let resultado = naves.filter(n => {
+    const coincideTexto = n.nombre.toLowerCase().includes(filtroTexto);
+    const coincideTipo = filtroTipo == 'todos' || n.tipo == filtroTipo;
     return coincideTexto && coincideTipo;
   });
 
@@ -192,20 +186,41 @@ function mostrarSeccion(idSeccion) {
   activa.classList.add("seccion--activa");
 }
 
-function inicializarNav() {
-  const navElement=document.getElementById("navegacion-principal");
-  navElement.innerHTML="";
+// function inicializarNav() {
+//   const navElement=document.getElementById("navegacion-principal");
+//   navElement.innerHTML="";
 
-  for (let i=0; i<secciones.length; i++) {
-    const boton=document.createElement("button");
-    boton.textContent=secciones[i].texto;
+//   for (let i=0; i<secciones.length; i++) {
+//     const boton=document.createElement("button");
+//     boton.textContent=secciones[i].texto;
+//     boton.classList.add("nav-boton");
+
+//     boton.addEventListener("click", () => {
+//       mostrarSeccion(secciones[i].id);
+//       document.querySelectorAll(".nav-boton").forEach(b => b.classList.remove("nav-boton--activo"));
+//       boton.classList.add("nav-boton--activo");
+//     });
+//     navElement.appendChild(boton);
+//   }
+//   navElement.firstChild.classList.add("nav-boton--activo");
+// }
+
+function inicializarNav() {
+  const navElement = document.getElementById("navegacion-principal");
+  navElement.innerHTML = "";
+
+  for (let i = 0; i < secciones.length; i++) {
+    const boton = document.createElement("button");
+    boton.textContent = secciones[i].texto;
     boton.classList.add("nav-boton");
 
     boton.addEventListener("click", () => {
       mostrarSeccion(secciones[i].id);
       document.querySelectorAll(".nav-boton").forEach(b => b.classList.remove("nav-boton--activo"));
       boton.classList.add("nav-boton--activo");
+      if (secciones[i].id == 'seccion-mando') renderDashboard();
     });
+
     navElement.appendChild(boton);
   }
   navElement.firstChild.classList.add("nav-boton--activo");
@@ -249,7 +264,7 @@ function renderMisiones() {
 
         <select id="m-piloto" required>
           <option value="" disabled selected>Asignar piloto</option>
-          ${pilotos.filter(p => p.estado === 'activo').map(p => `<option value="${p.nombre}">${p.nombre}</option>`).join('')}
+          ${pilotos.filter(p => p.estado == 'activo').map(p => `<option value="${p.nombre}">${p.nombre}</option>`).join('')}
         </select>
 
         <select id="m-dificultad" required>
@@ -300,7 +315,7 @@ function pintarTarjetas() {
 
   // Filtramos las misiones según la dificultad
   const misionesFiltradas = misiones.filter(m => {
-    return filtro === 'todas' || m.dificultad === filtro;
+    return filtro == 'todas' || m.dificultad == filtro;
   });
 
   // Vaciamos las tres columnas (solo las tarjetas, no el título)
@@ -326,7 +341,7 @@ function pintarTarjetas() {
       <p>Dificultad: ${m.dificultad}</p>
       <p>Fecha: ${m.fecha}</p>
       <div class="tarjeta-botones">
-        ${m.columna !== 'completada' ? `<button onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
+        ${m.columna != 'completada' ? `<button onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
         <button onclick="eliminarMision(${m.id})">Eliminar</button>
       </div>
     `;
@@ -335,9 +350,9 @@ function pintarTarjetas() {
     document.getElementById('columna-' + m.columna).appendChild(tarjeta);
 
     // Actualizamos el contador correspondiente
-    if (m.columna === 'pendiente') contPendiente++;
-    else if (m.columna === 'en-curso') contEnCurso++;
-    else if (m.columna === 'completada') contCompletada++;
+    if (m.columna == 'pendiente') contPendiente++;
+    else if (m.columna == 'en-curso') contEnCurso++;
+    else if (m.columna == 'completada') contCompletada++;
   }
 
   // Mostramos los contadores
@@ -348,8 +363,8 @@ function pintarTarjetas() {
 
 function avanzarMision(id) {
   const mision = misiones.find(m => m.id === id);
-  if (mision.columna === 'pendiente') mision.columna = 'en-curso';
-  else if (mision.columna === 'en-curso') mision.columna = 'completada';
+  if (mision.columna == 'pendiente') mision.columna = 'en-curso';
+  else if (mision.columna == 'en-curso') mision.columna = 'completada';
   localStorage.setItem('misiones', JSON.stringify(misiones));
   renderMisiones();
 }
@@ -380,11 +395,99 @@ function crearMision(e) {
   renderMisiones();
 }
 
+function renderDashboard() {
+  let navesOperativas = 0;
+  let navesReparacion = 0;
+  let navesDestruidas = 0;
+
+  for (let i = 0; i < naves.length; i++) {
+    if (naves[i].estado === 'operativa') navesOperativas++;
+    else if (naves[i].estado === 'en reparación') navesReparacion++;
+    else if (naves[i].estado === 'destruida') navesDestruidas++;
+  }
+
+  let naveMasRapida = naves[0];
+  for (let i = 1; i < naves.length; i++) {
+    if (naves[i].velocidad > naveMasRapida.velocidad) {
+      naveMasRapida = naves[i];
+    }
+  }
+
+  let pilotosActivos = 0;
+  let pilotosHeridos = 0;
+  let pilotosKIA = 0;
+
+  for (let i = 0; i < pilotos.length; i++) {
+    if (pilotos[i].estado === 'activo') pilotosActivos++;
+    else if (pilotos[i].estado === 'herido') pilotosHeridos++;
+    else if (pilotos[i].estado === 'KIA') pilotosKIA++;
+  }
+
+  let pilotoTop = pilotos[0];
+  for (let i = 1; i < pilotos.length; i++) {
+    if (pilotos[i].victorias > pilotoTop.victorias) {
+      pilotoTop = pilotos[i];
+    }
+  }
+
+  let misionesPendientes = 0;
+  let misionesEnCurso = 0;
+  let misionesCompletadas = 0;
+
+  for (let i = 0; i < misiones.length; i++) {
+    if (misiones[i].columna === 'pendiente') misionesPendientes++;
+    else if (misiones[i].columna === 'en-curso') misionesEnCurso++;
+    else if (misiones[i].columna === 'completada') misionesCompletadas++;
+  }
+
+  const totalMisiones = misiones.length;
+  const porcentaje = totalMisiones > 0 ? Math.round((misionesCompletadas / totalMisiones) * 100) : 0;
+
+  document.getElementById('stats-naves').innerHTML = `
+    <h3 class="dashboard-subtitulo">Naves</h3>
+    <p>total: ${naves.length}</p>
+    <p>operativas: ${navesOperativas}</p>
+    <p>en reparación: ${navesReparacion}</p>
+    <p>destruidas: ${navesDestruidas}</p>
+  `;
+
+  document.getElementById('stats-pilotos').innerHTML = `
+    <h3 class="dashboard-subtitulo">Pilotos</h3>
+    <p>total: ${pilotos.length}</p>
+    <p>activos: ${pilotosActivos}</p>
+    <p>heridos: ${pilotosHeridos}</p>
+    <p>kia: ${pilotosKIA}</p>
+  `;
+
+  document.getElementById('stats-misiones').innerHTML = `
+    <h3 class="dashboard-subtitulo">Misiones</h3>
+    <p>total: ${totalMisiones}</p>
+    <p>pendientes: ${misionesPendientes}</p>
+    <p>en curso: ${misionesEnCurso}</p>
+    <p>completadas: ${misionesCompletadas}</p>
+  `;
+
+  document.getElementById('stats-records').innerHTML = `
+    <h3 class="dashboard-subtitulo">Récords</h3>
+    <p>piloto top: ${pilotoTop ? pilotoTop.nombre + ' (' + pilotoTop.victorias + ' victorias)' : 'sin datos'}</p>
+    <p>nave más rápida: ${naveMasRapida ? naveMasRapida.nombre + ' (' + naveMasRapida.velocidad + ' MGLT)' : 'sin datos'}</p>
+  `;
+
+  document.getElementById('visualizacion').innerHTML = `
+    <h3 class="dashboard-subtitulo">Progreso de misiones</h3>
+    <p>Completadas: ${porcentaje}%</p>
+    <div class="barra-fondo">
+      <div class="barra-progreso" style="width: ${porcentaje}%"></div>
+    </div>
+  `;
+}
+
 //INICIO DE LAS FUNCIONES//
 window.onload= () => {
   inicializarNav();
   mostrarTodoElHangar();
   renderPilotos();
   renderMisiones();
+  renderDashboard();
   mostrarSeccion('seccion-hangar');
 };

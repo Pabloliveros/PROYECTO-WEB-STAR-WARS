@@ -73,7 +73,6 @@
 }
 
 body {
-  background-color: var(--color-fondo);
   color: var(--color-texto);
   font-family: var(--fuente-principal);
   min-height: 100vh;
@@ -82,12 +81,10 @@ body {
   letter-spacing: 3.5px;
   background-color: var(--bg);
   color: var(--text);
-  place-content: center;
 }
 
 p {
   letter-spacing: 1px;
-  ;
 }
 
 .color-Hangar{
@@ -231,6 +228,20 @@ label {
   line-height: 45px;
 }
 
+.barra-fondo {
+  background-color: var(--color-borde);
+  border-radius: var(--radio-borde);
+  height: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.barra-progreso {
+  background-color: var(--color-primario);
+  border-radius: var(--radio-borde);
+  height: 100%;
+  transition: width 0.4s ease;
+}
 
 /* body {
   background-color: var(--bg);
