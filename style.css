@@ -243,6 +243,11 @@ label {
   transition: width 0.4s ease;
 }
 
+#porcentaje{
+font-family: 'arial';
+}
+
+
 /* body {
   background-color: var(--bg);
   color: var(--text);

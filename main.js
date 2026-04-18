@@ -475,7 +475,7 @@ function renderDashboard() {
 
   document.getElementById('visualizacion').innerHTML = `
     <h3 class="dashboard-subtitulo">Progreso de misiones</h3>
-    <p>Completadas: ${porcentaje}%</p>
+    <p>Completadas: ${porcentaje}<a id="porcentaje">%</a></p>
     <div class="barra-fondo">
       <div class="barra-progreso" style="width: ${porcentaje}%"></div>
     </div>
