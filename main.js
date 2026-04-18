@@ -38,12 +38,12 @@ function mostrarTodoElHangar(navesAMostrar=naves) {
       <div class="hangar-controles">
         <input type="text" id="busqueda-nave" placeholder="Buscar una nave" class="input-estilo">
         <select id="filtro-tipo" class="select-estilo">
-            <option value="todos">Todos los tipos</option>
+            <option value="todos">todos los tipos</option>
             <option value="caza">Caza</option>
             <option value="transporte">Transporte</option>
             <option value="fragata">Fragata</option>
         </select>
-        <button id="btn-ordenar">Ordenar por Velocidad ↑</button>
+        <button id="btn-ordenar" class="button-content">ordenar por velocidad ↑</button>
       </div>
       <p id="contador-naves" class="contador-naves"></p>
       <div id="grid-naves" class="naves-grid"></div>
@@ -125,7 +125,7 @@ function renderPilotos() {
                 ${naves.map(n => `<option value="${n.nombre}">${n.nombre}</option>`).join('')}
             </select>
 
-            <input type="number" id="v-p" placeholder="Victorias" min="0" required>
+            <input type="number" id="v-p" placeholder="victorias" min="0" required>
 
             <select id="e-p" required>
                 <option value="activo">Activo</option>
@@ -133,7 +133,7 @@ function renderPilotos() {
                 <option value="KIA">KIA (Misión Finalizada)</option>
             </select>
 
-            <button type="submit">Registrar Piloto</button>
+            <button type="submit" class="button-content">Registrar Piloto</button>
         </form>
 
         <ul id="lista-p">
@@ -143,7 +143,7 @@ function renderPilotos() {
                     - nave: ${p.nave} 
                     - victorias: ${p.victorias} 
                     - estado: <span class="tag-${p.estado}">${p.estado}</span>
-                    <button onclick="borrarP(${p.id})">Eliminar</button>
+                    <button class="button-content" onclick="borrarP(${p.id})">Eliminar</button>
                 </li>
             `).join('')}
         </ul>
@@ -278,7 +278,7 @@ function renderMisiones() {
         <input type="date" id="m-fecha" required>
         <textarea id="m-descripcion" placeholder="Descripción breve" required></textarea>
 
-        <button type="submit">Añadir misión</button>
+        <button type="submit" class="button-content">Añadir misión</button>
       </form>
     </div>
 
@@ -341,8 +341,8 @@ function pintarTarjetas() {
       <p>Dificultad: ${m.dificultad}</p>
       <p>Fecha: ${m.fecha}</p>
       <div class="tarjeta-botones">
-        ${m.columna != 'completada' ? `<button onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
-        <button onclick="eliminarMision(${m.id})">Eliminar</button>
+        ${m.columna != 'completada' ? `<button class="button-content" onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
+        <button class="button-content" onclick="eliminarMision(${m.id})">Eliminar</button>
       </div>
     `;
 
