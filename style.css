@@ -55,11 +55,15 @@
   border-radius: var(--radio-borde);
   color: var(--color-primario);
   cursor: pointer;
-  font-family: var(--fuente-principal);
   letter-spacing: 1px;
   padding: 8px 14px;
   transition: background-color 0.2s, color 0.2s;
   box-shadow: 1px 1px 2px #cacaca;
+}
+
+:root.dark .button-content:hover {
+  background-color: var(--color-primario);
+  color: #000;
 }
 
 :root.dark input, 
@@ -86,13 +90,21 @@ textarea::placeholder {
 
 @font-face {
   font-family: 'StarJedi';
-  src: url('Starjedi.ttf') format('truetype');
+  src: url('font/Starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 .form-separacion {
   margin-bottom: 15px;
+}
+
+#n-p {
+  width: 205px;
+}
+
+#v-p {
+  width: 150px;
 }
 
 .nave-card-interior {
@@ -275,7 +287,7 @@ label {
   font-family: var(--fuente-principal);
   letter-spacing: 1px;
   padding: 15px 20px;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, background-color 0.2s;
   border-radius: 0px;
 }
 
@@ -290,7 +302,17 @@ label {
 
 #lista-p {
   letter-spacing: 1px;
-  line-height: 45px;
+  line-height: 25px;
+  list-style-type: none;
+
+}
+
+#lista-p li {
+  margin-bottom: 30px;
+}
+
+#lista-p button {
+  margin-top: 15px;
 }
 
 .barra-fondo {
@@ -309,7 +331,7 @@ label {
 }
 
 #theme-toggle {
-    background: var(--color-texto);
+    background: #ffffff;
     border: 1px solid #6a6a6a;
     border-radius: var(--radio-borde);
     color: var(--color-fondo);
@@ -317,12 +339,12 @@ label {
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
     padding: 15px 20px;
-    transition: color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s;
     margin-bottom: 10px;
 }
 
 #theme-toggle:hover {
-  background-color: #a5a5a5;
+  background-color: #b4b4b4;
 }
 
 /* Inputs y selects */
@@ -339,6 +361,10 @@ input, select, textarea {
 
 #m-nombre{
   width: 215px;
+}
+
+#form-p {
+  margin-bottom: 20px;
 }
 
 #form-mision {

@@ -113,7 +113,7 @@ function renderPilotos() {
     sec.innerHTML=`
         <h2 class="seccion-titulo">Registro de Pilotos</h2>
         <form id="form-p" onsubmit="crearPiloto(event)">
-            <input id="n-p" class="form-separacion" placeholder="nombre del piloto" required>
+            <input id="n-p" class="form-separacion" placeholder="nombre del piloto:" required>
             
             <select id="r-p" class="form-separacion" required>
                 <option value="" disabled selected>Selecciona un Rango</option>
@@ -125,16 +125,16 @@ function renderPilotos() {
             </select>
 
             <select id="s-p" class="form-separacion" required>
-                <option value="" disabled selected>Asignar Nave</option>
+                <option class="option-asignar" value="" disabled selected>asignar Nave</option>
                 ${naves.map(n => `<option value="${n.nombre}">${n.nombre}</option>`).join('')}
             </select>
 
             <input type="number" class="form-separacion" id="v-p" placeholder="victorias" min="0" required>
 
             <select id="e-p" class="form-separacion" required>
-                <option value="activo">Activo</option>
-                <option value="herido">Herido</option>
-                <option value="KIA">KIA (Misión Finalizada)</option>
+                <option value="activo">activo</option>
+                <option value="herido">herido</option>
+                <option value="KIA">kia</option>
             </select>
 
             <button type="submit" class="button-content">Registrar Piloto</button>
@@ -143,11 +143,11 @@ function renderPilotos() {
         <ul id="lista-p">
             ${pilotos.map(p => `
                 <li>
-                    ${p.rango} ${p.nombre} 
-                    - nave: ${p.nave} 
-                    - victorias: ${p.victorias} 
-                    - estado: <span class="tag-${p.estado}">${p.estado}</span>
-                    <button class="button-content" onclick="borrarP(${p.id})">Eliminar</button>
+                  <p>${p.rango} ${p.nombre}</p>
+                  <p>nave: ${p.nave}</p>
+                  <p>victorias: ${p.victorias}</p>
+                  <p>estado: <span class="tag-${p.estado}">${p.estado}</span></p>
+                  <button class="button-content" onclick="borrarP(${p.id})">eliminar</button>
                 </li>
             `).join('')}
         </ul>
