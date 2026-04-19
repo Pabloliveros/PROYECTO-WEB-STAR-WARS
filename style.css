@@ -23,7 +23,7 @@
 
 :root.dark #cabecera {
   background-color: #e0e0e0;
-  border-bottom-color: #333;
+  border-bottom: 1px solid #cfcfcf;
 }
 
 :root.dark #navegacion-principal {
@@ -41,7 +41,7 @@
 }
 
 :root.dark .nav-boton:hover {
-  color: #a71721;
+  color: #ffffff;
 }
 
 :root.dark .nav-boton--activo {
@@ -89,6 +89,23 @@ textarea::placeholder {
   src: url('Starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+.nave-card-interior {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.nave-imagen {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nave-card {
+  margin-bottom: 5px;
 }
 
 #porcentaje{
@@ -191,6 +208,10 @@ label {
   gap: 1rem;
 }
 
+.kanban-tablero p strong {
+  letter-spacing: 2.5px;
+}
+
 .kanban-columna {
   background-color: var(--color-fondo-tarjeta);
   border: 1px solid var(--color-borde);
@@ -202,8 +223,12 @@ label {
 .kanban-titulo {
   color: var(--color-secundario);
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
   align-items: center;
+}
+
+.tarjeta-botones {
+  margin-top: 15px;
 }
 
 .dashboard-contenido {
@@ -249,7 +274,7 @@ label {
 }
 
 .nav-boton:hover {
-  color: var(--color-texto);
+  color: #000000;
 }
 
 .nav-boton--activo {
@@ -277,16 +302,6 @@ label {
   transition: width 0.4s ease;
 }
 
-/* #theme-toggle {
-  color: #e62727;
-  background-color: #ffffff;
-  height: 40px;
-  width: 80px;
-  border: none;
-  border-radius: 5px;
-  font-size:medium
-} */
-
 #theme-toggle {
     background: var(--color-texto);
     border: 1px solid #6a6a6a;
@@ -299,7 +314,10 @@ label {
     transition: color 0.2s, border-color 0.2s;
     margin-bottom: 10px;
 }
-    /* box-shadow: 1px 1px 2px #000000; */
+
+#theme-toggle:hover {
+  background-color: #a5a5a5;
+}
 
 /* Inputs y selects */
 input, select, textarea {
@@ -310,6 +328,29 @@ input, select, textarea {
   font-family: var(--fuente-principal);
   letter-spacing: 1px;
   padding: 8px 12px;
+
+}
+
+#m-nombre{
+  width: 215px;
+}
+
+#form-mision {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+#form-mision textarea {
+  align-self: flex-start;
+  height: 41px;
+  width: 200px;
+}
+
+.formulario-contenedor h3{
+  margin-bottom: 10px;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -341,6 +382,11 @@ button:hover {
   color: var(--text);
   place-content: center;
 } */
+
+
+
+
+
 
 /*Transicion*/
 
@@ -377,5 +423,61 @@ button:hover {
   to {
     clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
   }
+}
+
+@media (max-width: 520px) {
+
+  .seccion-titulo, .hangar-controles {
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .nave-info {
+    text-align: center;
+  }
+
+  .contador-naves{
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .nave-card-interior {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nave-imagen {
+    margin-bottom: 30px;
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .kanban-tablero {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 430px) {
+  
+  #navegacion-principal {
+    flex-direction: column;
+  }
+
+  #cabecera {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .kanban-tablero {
+    flex-direction: column;
+  }
+
 }
    

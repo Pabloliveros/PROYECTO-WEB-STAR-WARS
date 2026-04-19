@@ -5,11 +5,11 @@ let velocidadAsc = true;
 
 // CONSTANTES//
 const naves= [
-  { nombre: "x-wing", tipo: "caza", velocidad: 100, tripulacion: 1, estado: "operativa", emoji: "🚀" },
-  { nombre: "millennium falcon", tipo: "transporte", velocidad: 150, tripulacion: 6, estado: "operativa", emoji: "🛸" },
-  { nombre: "y-wing", tipo: "caza", velocidad: 80, tripulacion: 2, estado: "en reparación", emoji: "✈️" },
-  { nombre: "a-wing", tipo: "caza", velocidad: 175, tripulacion: 1, estado: "operativa", emoji: "⚡" },
-  { nombre: "b-wing", tipo: "fragata", velocidad: 91, tripulacion: 3, estado: "destruida", emoji: "💥" }
+  { nombre: "x-wing", tipo: "caza", velocidad: 100, tripulacion: 1, estado: "operativa", imagen:"Xwing.webp" },
+  { nombre: "millennium falcon", tipo: "transporte", velocidad: 150, tripulacion: 6, estado: "operativa", imagen:"Millennium_Falcon.webp" },
+  { nombre: "y-wing", tipo: "caza", velocidad: 80, tripulacion: 2, estado: "en reparación", imagen:"Y-wing.webp" },
+  { nombre: "a-wing", tipo: "caza", velocidad: 175, tripulacion: 1, estado: "operativa", imagen:"A-wing.webp" },
+  { nombre: "b-wing", tipo: "fragata", velocidad: 91, tripulacion: 3, estado: "destruida", imagen:"B-wing.webp" }
 ];
 let pilotos= JSON.parse(localStorage.getItem('pilotos')) || [
 
@@ -34,14 +34,14 @@ function mostrarTodoElHangar(navesAMostrar=naves) {
   //si no hay input lo creamos//
   if (!document.getElementById('busqueda-nave')) {
     contenedor.innerHTML= `
-      <h2 class="seccion-titulo">Hangar de Naves</h2>
+      <h2 class="seccion-titulo">hangar de Naves</h2>
       <div class="hangar-controles">
-        <input type="text" id="busqueda-nave" placeholder="Buscar una nave" class="input-estilo">
+        <input type="text" id="busqueda-nave" placeholder="buscar una nave" class="input-estilo">
         <select id="filtro-tipo" class="select-estilo">
             <option value="todos">todos los tipos</option>
-            <option value="caza">Caza</option>
-            <option value="transporte">Transporte</option>
-            <option value="fragata">Fragata</option>
+            <option value="caza">caza</option>
+            <option value="transporte">transporte</option>
+            <option value="fragata">fragata</option>
         </select>
         <button id="btn-ordenar" class="button-content">ordenar por velocidad ↑</button>
       </div>
@@ -59,17 +59,21 @@ function mostrarTodoElHangar(navesAMostrar=naves) {
     const card=document.createElement('div');
     card.className='nave-card';
     card.innerHTML=`
-        <span class="nave-emoji">${nave.emoji}</span>
+    <div class="nave-card-interior">
+      <div class="nave-info">
         <h3 class="color-Hangar">${nave.nombre}</h3>
-        <p>Tipo: ${nave.tipo}</p>
+        <p>tipo: ${nave.tipo}</p>
         <p>velocidad: <strong>${nave.velocidad}</strong> MGLT</p>
-        <p>Estado: <span class="tag-${nave.estado.replace(' ', '-')}">${nave.estado}</span></p>
-    `;
+        <p>tripulacion: ${nave.tripulacion}</p>
+        <p>estado: <span class="tag-${nave.estado.replace(' ', '-')}">${nave.estado}</span></p>
+      </div>
+      <img class="nave-imagen" src="images/${nave.imagen}" alt="${nave.nombre}">
+    </div>`;
     grid.appendChild(card);
   });
 
   //Actualizamos el contador//
-  document.getElementById('contador-naves').textContent = `Mostrando ${navesAMostrar.length} naves.`;
+  document.getElementById('contador-naves').textContent = `Mostrando: ${navesAMostrar.length} naves`;
 }
 
 //FILTRAR NAVES//
@@ -82,7 +86,7 @@ function filtrarNaves() {
 function toggleOrden() {
   velocidadAsc=!velocidadAsc;
   //Actualizamos la flecha en el botón con un ternario
-  document.getElementById('btn-ordenar').textContent=`Ordenar por Velocidad ${velocidadAsc ? '↑' : '↓'}`;
+  document.getElementById('btn-ordenar').textContent=`ordenar por velocidad ${velocidadAsc ? '↑' : '↓'}`;
   aplicarCambios();
 }
 
@@ -276,14 +280,14 @@ function renderMisiones() {
         </select>
 
         <input type="date" id="m-fecha" required>
-        <textarea id="m-descripcion" placeholder="Descripción breve" required></textarea>
+        <textarea id="m-descripcion" placeholder="Descripción breve" rows="3" required></textarea>
 
         <button type="submit" class="button-content">Añadir misión</button>
       </form>
     </div>
 
     <div class="misiones-filtro">
-      <label>Filtrar por dificultad:</label>
+      <label class= "pie-texto">Filtrar por dificultad:</label>
       <select id="filtro-dificultad" onchange="renderMisiones()">
         <option value="todas">Todas</option>
         <option value="facil">Fácil</option>
@@ -341,7 +345,8 @@ function pintarTarjetas() {
       <p>Dificultad: ${m.dificultad}</p>
       <p>Fecha: ${m.fecha}</p>
       <div class="tarjeta-botones">
-        ${m.columna != 'completada' ? `<button class="button-content" onclick="avanzarMision(${m.id})">Avanzar →</button>` : ''}
+        ${m.columna != 'pendiente' ? `<button class="button-content" onclick="retrocederMision(${m.id})">Retroceder</button>` : ''}
+        ${m.columna != 'completada' ? `<button class="button-content" onclick="avanzarMision(${m.id})">Avanzar</button>` : ''}
         <button class="button-content" onclick="eliminarMision(${m.id})">Eliminar</button>
       </div>
     `;
@@ -365,6 +370,14 @@ function avanzarMision(id) {
   const mision = misiones.find(m => m.id === id);
   if (mision.columna == 'pendiente') mision.columna = 'en-curso';
   else if (mision.columna == 'en-curso') mision.columna = 'completada';
+  localStorage.setItem('misiones', JSON.stringify(misiones));
+  renderMisiones();
+}
+
+function retrocederMision(id) {
+  const mision = misiones.find(m => m.id === id);
+  if (mision.columna == 'completada') mision.columna = 'en-curso';
+  else if (mision.columna == 'en-curso') mision.columna = 'pendiente';
   localStorage.setItem('misiones', JSON.stringify(misiones));
   renderMisiones();
 }
