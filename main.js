@@ -113,9 +113,9 @@ function renderPilotos() {
     sec.innerHTML=`
         <h2 class="seccion-titulo">Registro de Pilotos</h2>
         <form id="form-p" onsubmit="crearPiloto(event)">
-            <input id="n-p" placeholder="Nombre del piloto" required>
+            <input id="n-p" class="form-separacion" placeholder="nombre del piloto" required>
             
-            <select id="r-p" required>
+            <select id="r-p" class="form-separacion" required>
                 <option value="" disabled selected>Selecciona un Rango</option>
                 <option value="Recluta">Recluta</option>
                 <option value="Teniente">Teniente</option>
@@ -124,14 +124,14 @@ function renderPilotos() {
                 <option value="General">General</option>
             </select>
 
-            <select id="s-p" required>
+            <select id="s-p" class="form-separacion" required>
                 <option value="" disabled selected>Asignar Nave</option>
                 ${naves.map(n => `<option value="${n.nombre}">${n.nombre}</option>`).join('')}
             </select>
 
-            <input type="number" id="v-p" placeholder="victorias" min="0" required>
+            <input type="number" class="form-separacion" id="v-p" placeholder="victorias" min="0" required>
 
-            <select id="e-p" required>
+            <select id="e-p" class="form-separacion" required>
                 <option value="activo">Activo</option>
                 <option value="herido">Herido</option>
                 <option value="KIA">KIA (Misión Finalizada)</option>
@@ -255,6 +255,7 @@ btn.addEventListener('click', (e) => {
 let misiones = JSON.parse(localStorage.getItem('misiones')) || [];
 
 function renderMisiones() {
+  const filtroActual = document.getElementById('filtro-dificultad')?.value || 'todas';
   const seccion = document.getElementById('seccion-misiones');
 
   seccion.innerHTML = `
@@ -309,6 +310,8 @@ function renderMisiones() {
       </div>
     </div>
   `;
+
+   document.getElementById('filtro-dificultad').value = filtroActual;
 
   pintarTarjetas();
 }

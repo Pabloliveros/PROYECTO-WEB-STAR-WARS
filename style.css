@@ -91,6 +91,10 @@ textarea::placeholder {
   font-style: normal;
 }
 
+.form-separacion {
+  margin-bottom: 15px;
+}
+
 .nave-card-interior {
   display: flex;
   align-items: center;
@@ -147,7 +151,8 @@ color: var(--color-secundario);
   padding: 30px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 90px;
 }
 
 .cabecera-contenido {
@@ -225,6 +230,7 @@ label {
   display: flex;
   gap: 8px;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .tarjeta-botones {
@@ -358,6 +364,10 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--color-primario);
 }
 
+.tarjeta-botones .button-content {
+  margin-bottom: 5px;
+}
+
 /* Botones generales */
 .button-content {
   background-color: var(--color-fondo-tarjeta);
@@ -473,6 +483,7 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    gap: 10px;
   }
 
   .kanban-tablero {
