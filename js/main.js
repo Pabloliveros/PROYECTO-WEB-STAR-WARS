@@ -126,13 +126,14 @@ function renderPilotos() {
             </select>
 
             <select id="s-p" class="form-separacion" required>
-                <option class="option-asignar" value="" disabled selected>asignar Nave</option>
+                <option class="option-asignar" value="" disabled selected>asignar nave</option>
                 ${naves.map(n => `<option value="${n.nombre}">${n.nombre}</option>`).join('')}
             </select>
 
             <input type="number" class="form-separacion" id="v-p" placeholder="victorias" min="0" required>
 
             <select id="e-p" class="form-separacion" required>
+                <option value="" disabled selected>estado</option>
                 <option value="activo">activo</option>
                 <option value="herido">herido</option>
                 <option value="KIA">kia</option>
@@ -248,7 +249,8 @@ function renderMisiones() {
       <form id="form-mision" onsubmit="crearMision(event)">
 
         <input id="m-nombre" placeholder="Nombre de la misión" required>
-
+        <textarea id="m-descripcion" placeholder="descripción: " rows="3" required></textarea>
+        
         <select id="m-piloto" required>
           <option value="" disabled selected>Asignar piloto</option>
           ${pilotos.filter(p => p.estado == 'activo').map(p => `<option value="${p.nombre}">${p.nombre}</option>`).join('')}
@@ -263,14 +265,14 @@ function renderMisiones() {
         </select>
 
         <input type="date" id="m-fecha" required>
-        <textarea id="m-descripcion" placeholder="Descripción breve" rows="3" required></textarea>
+        
 
         <button type="submit" class="button-content">Añadir misión</button>
       </form>
     </div>
 
     <div class="misiones-filtro">
-      <label class= "pie-texto">Filtrar por dificultad:</label>
+      <label class= "pie-texto">filtrar por dificultad:</label>
       <select id="filtro-dificultad" onchange="renderMisiones()">
         <option value="todas">Todas</option>
         <option value="facil">Fácil</option>
