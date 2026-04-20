@@ -148,7 +148,8 @@ function renderPilotos() {
                   <p>${p.rango} ${p.nombre}</p>
                   <p>nave: ${p.nave}</p>
                   <p>victorias: ${p.victorias}</p>
-                  <p>estado: <span class="tag-${p.estado}">${p.estado}</span></p>
+                  <p>estado: <span class="tag-${p.estado}">${p.estado}</span></p>     
+                  <button class="button-content" onclick="editarPiloto(${p.id})">editar</button>
                   <button class="button-content" onclick="borrarP(${p.id})">eliminar</button>
                 </li>
             `).join('')}
@@ -171,6 +172,39 @@ function crearPiloto(e) {
     localStorage.setItem('pilotos', JSON.stringify(pilotos));
     renderPilotos();
 }
+
+
+function editarPiloto(id) {
+    const piloto = pilotos.find(p => p.id === id);
+    if (!piloto) return;
+
+    //Rellenamos el formulario con los datos del piloto
+    document.getElementById('n-p').value = piloto.nombre;
+    document.getElementById('r-p').value = piloto.rango;
+    document.getElementById('s-p').value = piloto.nave;
+    document.getElementById('v-p').value = piloto.victorias;
+    document.getElementById('e-p').value = piloto.estado;
+
+    //Cambiamos el botón de enviar para que guarde los cambios en vez de crear uno nuevo
+    const form = document.getElementById('form-p');
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Guardar Cambios';
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+
+        piloto.nombre = document.getElementById('n-p').value;
+        piloto.rango = document.getElementById('r-p').value;
+        piloto.nave = document.getElementById('s-p').value;
+        piloto.victorias = parseInt(document.getElementById('v-p').value);
+        piloto.estado = document.getElementById('e-p').value;
+
+        localStorage.setItem('pilotos', JSON.stringify(pilotos));
+        renderPilotos();
+    };
+}
+
+
 
 function borrarP(id) {
     if (confirm("¿Quieres eliminar este piloto?")) {
