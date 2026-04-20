@@ -246,7 +246,6 @@ function inicializarNav() {
   }
   navElement.firstChild.classList.add("nav-boton--activo");
 }
-
 const btn = document.getElementById('theme-toggle');
 
 btn.addEventListener('click', (e) => {
@@ -260,8 +259,6 @@ btn.addEventListener('click', (e) => {
         return;
     }
 
-    // Si quieres que el círculo salga de donde haces click, 
-    // pasamos las coordenadas al CSS antes de empezar
     document.documentElement.style.setProperty('--x', e.clientX + 'px');
     document.documentElement.style.setProperty('--y', e.clientY + 'px');
 
