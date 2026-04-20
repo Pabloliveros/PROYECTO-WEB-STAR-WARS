@@ -2,7 +2,6 @@ let filtroTexto = "";
 let filtroTipo = "todos";
 let velocidadAsc = true;
 
-
 // CONSTANTES//
 const naves= [
   { nombre: "x-wing", tipo: "caza", velocidad: 100, tripulacion: 1, estado: "operativa", imagen:"Xwing.webp" },
@@ -11,6 +10,7 @@ const naves= [
   { nombre: "a-wing", tipo: "caza", velocidad: 175, tripulacion: 1, estado: "operativa", imagen:"A-wing.webp" },
   { nombre: "b-wing", tipo: "fragata", velocidad: 91, tripulacion: 3, estado: "destruida", imagen:"B-wing.webp" }
 ];
+
 let pilotos= JSON.parse(localStorage.getItem('pilotos')) || [
 
   {id: 1, nombre: "luke skywalker", rango: "Comandante", nave: "X-Wing", victorias: 12, estado: "activo" },
@@ -19,6 +19,7 @@ let pilotos= JSON.parse(localStorage.getItem('pilotos')) || [
   {id: 4, nombre: "leia organa", rango: "General", nave: "A-Wing", victorias: 5,  estado: "activo" },
 
 ];
+
 const secciones= [
   { texto: "hangar de naves", id: "seccion-hangar" },
   { texto: "registro de pilotos", id: "seccion-pilotos" },
@@ -142,7 +143,7 @@ function renderPilotos() {
 
         <ul id="lista-p">
             ${pilotos.map(p => `
-                <li>
+                <li class="li-pilotos">
                   <p>${p.rango} ${p.nombre}</p>
                   <p>nave: ${p.nave}</p>
                   <p>victorias: ${p.victorias}</p>
@@ -189,25 +190,6 @@ function mostrarSeccion(idSeccion) {
   activa.classList.remove("seccion--oculta");
   activa.classList.add("seccion--activa");
 }
-
-// function inicializarNav() {
-//   const navElement=document.getElementById("navegacion-principal");
-//   navElement.innerHTML="";
-
-//   for (let i=0; i<secciones.length; i++) {
-//     const boton=document.createElement("button");
-//     boton.textContent=secciones[i].texto;
-//     boton.classList.add("nav-boton");
-
-//     boton.addEventListener("click", () => {
-//       mostrarSeccion(secciones[i].id);
-//       document.querySelectorAll(".nav-boton").forEach(b => b.classList.remove("nav-boton--activo"));
-//       boton.classList.add("nav-boton--activo");
-//     });
-//     navElement.appendChild(boton);
-//   }
-//   navElement.firstChild.classList.add("nav-boton--activo");
-// }
 
 function inicializarNav() {
   const navElement = document.getElementById("navegacion-principal");
