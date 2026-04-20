@@ -68,7 +68,7 @@ function mostrarTodoElHangar(navesAMostrar=naves) {
         <p>tripulacion: ${nave.tripulacion}</p>
         <p>estado: <span class="tag-${nave.estado.replace(' ', '-')}">${nave.estado}</span></p>
       </div>
-      <img class="nave-imagen" src="images/${nave.imagen}" alt="${nave.nombre}">
+      <img class="nave-imagen" src="img/${nave.imagen}" alt="${nave.nombre}">
     </div>`;
     grid.appendChild(card);
   });

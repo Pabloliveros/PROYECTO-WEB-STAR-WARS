@@ -5,7 +5,7 @@
   --color-primario: #ffe81f;
   --color-secundario: #4fc3f7;
   --color-texto: #e0e0e0;
-  --color-texto-suave: #989898;
+  --color-texto-suave: #cacaca;
   --color-borde: #2a2a3a;
   --fuente-principal: 'Starjedi', sans-serif;
   --radio-borde: 6px;
@@ -22,25 +22,34 @@
 }
 
 :root.dark body {
-  background-image: url(images/claro.webp);
+  background-image: url(../img/claro.webp);
+  
 }
 
 :root.dark .logo {
-  content: url(images/logo_claro.png);
+  content: url(../img/logo_claro.png);
+  filter: 
+    drop-shadow(1px 0px 0px black)
+    drop-shadow(-1px 0px 0px black)
+    drop-shadow(0px 1px 0px black)
+    drop-shadow(0px -1px 0px black);
 }
 
 :root.dark #cabecera {
   background-color: #e0e0e0;
+  background-color: rgba(224, 224, 224, 0.5);
   border-bottom: 1px solid #cfcfcf;
 }
 
 :root.dark #navegacion-principal {
   background-color: #e0e0e0;
+  background-color: rgba(224, 224, 224, 0.5);
   border-bottom-color: #ccc;
 }
 
 :root.dark #pie-pagina {
   background-color: #e0e0e0;
+  background-color: rgba(224, 224, 224, 0.5);
   border-top-color: #ccc;
 }
 
@@ -98,7 +107,7 @@ textarea::placeholder {
 
 @font-face {
   font-family: 'StarJedi';
-  src: url('font/Starjedi.ttf') format('truetype');
+  src: url('../font/Starjedi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -145,7 +154,16 @@ font-family: 'arial';
 }
 
 .logo {
-  width: 150px;
+  display: block;
+  width: auto;
+  height: 68px;
+  position: relative;
+  top: 6px;
+  filter: 
+    drop-shadow(1px 0px 0px white)
+    drop-shadow(-1px 0px 0px white)
+    drop-shadow(0px 1px 0px white)
+    drop-shadow(0px -1px 0px white);
 }
 
 *, *::before, *::after {
@@ -162,8 +180,9 @@ body {
   flex-direction: column;
   letter-spacing: 3.5px;
   background-color: var(--bg);
-  background-image: url(images/oscuro2.webp);
+  background-image: url(../img/oscuro2.webp);
   color: var(--text);
+  background-size: 600px;
   /* 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
   */
@@ -177,8 +196,14 @@ p {
 color: var(--color-secundario);
 }
 
+#cabecera a {
+  display: flex;
+  align-items: center;
+}
+
 #cabecera {
   background-color: var(--color-fondo-nav);
+  background-color: rgba(13, 13, 20, 0.7);
   border-bottom: 2px solid var(--color-primario);
   padding: 30px;
   display: flex;
@@ -203,6 +228,7 @@ color: var(--color-secundario);
 
 #navegacion-principal {
   background-color: var(--color-fondo-nav);
+  background-color: rgba(13, 13, 20, 0.7);
   border-bottom: 1px solid var(--color-borde);
   display: flex;
   justify-content: center;
@@ -293,6 +319,7 @@ label {
   color: var(--color-texto-suave);
   padding: 20px;
   text-align: center;
+  background-color: rgba(13, 13, 20, 0.7);
 }
 
 .pie-texto{
@@ -577,4 +604,3 @@ button:hover {
   }
 
 }
-   
